@@ -1,5 +1,6 @@
 package org.example;
 
+import java.awt.event.KeyEvent;
 import java.util.Scanner;
 
 public class LoadScreen {
@@ -20,7 +21,9 @@ public class LoadScreen {
                   X) Exit
                 """);
 
-        scanner.nextLine();
+        String input = scanner.nextLine();
+
+
     }
 
     public void ledgerScreen() {
