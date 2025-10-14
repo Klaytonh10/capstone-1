@@ -2,7 +2,6 @@ package org.example;
 
 public class Transaction implements Comparable<Transaction>{
 
-    private int id = 0;
     private String date = "";
     private String time = "";
     private String description = "";
@@ -64,6 +63,6 @@ public class Transaction implements Comparable<Transaction>{
 
     @Override
     public int compareTo(Transaction otherTransaction) {
-        return Integer.compare(this.id, otherTransaction.id);
+        return Integer.compare(Integer.parseInt(this.time), Integer.parseInt(otherTransaction.time));
     }
 }

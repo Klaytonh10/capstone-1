@@ -5,36 +5,84 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+    //Transactions list
+    static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    static Scanner scanner = new Scanner(System.in);
+    static char userInput;
 
-        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    public static void main(String[] args) throws IOException  {
 
-        try(FileWriter write = new FileWriter("src/main/resources/transactions.csv")) {
-            FileReader fileReader = new FileReader("src/main/resources/transactions.csv");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+        FileReader fileReader = new FileReader("src/main/resources/transactions.csv");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        transactions = loadTransactions();
+        mainMenu();
 
-            bufferedReader.readLine();
+    }
+
+    private static void mainMenu() {
+        userInput = ' ';
+        do {
+            System.out.println("""
+                    =====================================
+                        Accounting Ledger Application
+                    =====================================
+                    
+                    D) Add Deposit
+                    P) Make Payment
+                    L) Ledger
+                    X) Exit
+                    
+                    """);
+            // get input
+            userInput = scanner.nextLine().charAt(0);
+
+            switch (Character.toUpperCase(userInput)) {
+                case 'D' -> { addDepositMenu(); break;}
+                case 'P' -> { makePayment(); break; }
+                case 'L' -> { ledgerMenu(); break;}
+            }
+        } while (Character.toUpperCase(userInput) != 'X');
+    }
+
+    public static void makePayment() {
+    }
+
+    public static void addDepositMenu() {
+        // prompt user for the deposit information and save to csv
+
+
+        System.out.print("Enter Today's Date: ");
+        String date = scanner.nextLine();
+        System.out.print("Enter Current Time: ");
+        String time = scanner.nextLine();
+        System.out.print("Enter Deposit Description: ");
+        String description = scanner.nextLine();
+        System.out.print("Enter Vendor Name: ");
+        String vendor = scanner.nextLine();
+        System.out.print("Enter Deposit Amount: $");
+        double amount = scanner.nextDouble();
+        Transaction transaction = new Transaction(date, time, description, vendor, amount);
+        transactions.add(transaction);
+    }
+
+    public static void ledgerMenu() {
+        //display ledger screen
+    }
+
+    public static ArrayList<Transaction> loadTransactions() {
+        try(FileWriter fileWriter = new FileWriter("src/main/resources/transactions.csv")) {
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
             String input;
-
-
-            // date|time|description|vendor|amount
-            while((input = bufferedReader.readLine()) != null) {
-                String[] sections = input.split("\\|");
-                int date; // use datetime
-                String time; // use datetime
-
-                System.out.println(input);
+            while((input = scanner.nextLine()) != null) {
+                String[] data = input.split("\\|");
             }
 
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File not found " + e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error opening file " + e);
         }
-
-
     }
 }
