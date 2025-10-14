@@ -16,7 +16,7 @@ public class Main {
 
         FileReader fileReader = new FileReader("src/main/resources/transactions.csv");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        transactions = loadTransactions();
+        //transactions = loadTransactions();
         mainMenu();
 
     }
@@ -52,7 +52,6 @@ public class Main {
     public static void addDepositMenu() {
         // prompt user for the deposit information and save to csv
 
-        String[] data = {};
         String date = LocalDate.now().toString();
         System.out.print("Enter Current Time: ");
         String time = scanner.nextLine();
@@ -62,33 +61,18 @@ public class Main {
         String vendor = scanner.nextLine();
         System.out.print("Enter Deposit Amount: $");
         String amount = scanner.nextLine();
-        data[0] = date;
-        Transaction transaction = new Transaction(date, time, description, vendor, amount);
+        String[] data = {date, time, description, vendor, amount};
+        Transaction transaction = new Transaction(data[0], data[1], data[2], data[3], data[4]);
         transactions.add(transaction);
 
-        //assign each value to separate variables
+        System.out.println(transaction + " added");
     }
 
     public static void ledgerMenu() {
         //display ledger screen
     }
 
-    public static ArrayList<Transaction> loadTransactions() {
-        try(FileWriter fileWriter = new FileWriter("src/main/resources/transactions.csv")) {
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+    public static void loadTransactions() {
 
-            String input;
-            while((input = scanner.nextLine()) != null) {
-                String[] data = input.split("\\|");
-            }
-
-
-            // return all transactions
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found " + e);
-        } catch (IOException e) {
-            System.out.println("Error opening file " + e);
-        }
     }
 }
