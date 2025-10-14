@@ -75,6 +75,7 @@ public class Main {
     public static void loadTransactions() {
         try(FileWriter fileWriter = new FileWriter("src/main/resources/transactions.csv")) {
 
+
         }
     }
 }
