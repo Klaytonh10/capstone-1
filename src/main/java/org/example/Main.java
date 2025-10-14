@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,9 +52,8 @@ public class Main {
     public static void addDepositMenu() {
         // prompt user for the deposit information and save to csv
 
-
-        System.out.print("Enter Today's Date: ");
-        String date = scanner.nextLine();
+        String[] data = {};
+        String date = LocalDate.now().toString();
         System.out.print("Enter Current Time: ");
         String time = scanner.nextLine();
         System.out.print("Enter Deposit Description: ");
@@ -61,9 +61,12 @@ public class Main {
         System.out.print("Enter Vendor Name: ");
         String vendor = scanner.nextLine();
         System.out.print("Enter Deposit Amount: $");
-        double amount = scanner.nextDouble();
+        String amount = scanner.nextLine();
+        data[0] = date;
         Transaction transaction = new Transaction(date, time, description, vendor, amount);
         transactions.add(transaction);
+
+        //assign each value to separate variables
     }
 
     public static void ledgerMenu() {
@@ -78,6 +81,9 @@ public class Main {
             while((input = scanner.nextLine()) != null) {
                 String[] data = input.split("\\|");
             }
+
+
+            // return all transactions
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found " + e);
