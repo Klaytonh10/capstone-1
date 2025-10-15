@@ -40,6 +40,7 @@ public class Main {
                     P) Make Payment
                     L) Ledger
                     X) Exit
+                    
                     """);
             // get input
             char userInput = Character.toUpperCase(scanner.nextLine().charAt(0));
