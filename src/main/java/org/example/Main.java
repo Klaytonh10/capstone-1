@@ -22,12 +22,13 @@ public class Main {
 //
         //bufferedReader.readLine();
 
-        //loadTransactions();
+        readTransactions();
+
         mainMenu();
     }
 
     private static void mainMenu() {
-        //userInput = ' ';
+
         boolean exit = false;
 
         while (!exit) {
@@ -45,14 +46,24 @@ public class Main {
                     """);
             System.out.print("Select an option: ");
             // get input
-            char userInput = Character.toUpperCase(scanner.nextLine().charAt(0));
+            String userInput = scanner.nextLine().toUpperCase();
 
-            switch (Character.toUpperCase(userInput)) {
-                case 'D' -> { addTransaction(true); break;} // add deposit
-                case 'P' -> { addTransaction(false); break; }
-                case 'L' -> { ledgerMenu(); break;}
-                case 'X' -> {exit = true; break;}
-                default -> {System.out.println("try again");}
+            switch (userInput) {
+                case "D":
+                    addTransaction(true);
+                    break;// add deposit
+                case "P":
+                    addTransaction(false);
+                    break;
+                case "L":
+                    ledgerMenu();
+                    break;
+                case "X":
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("try again");
+                    break;
             }
         };
     }
@@ -106,17 +117,31 @@ public class Main {
                     A) Display all entries
                     D) Deposits
                     P) Payments
-                    X) Exit
+                    R) Reports
+                    H) Home
                     
                     """);
             System.out.print("Select an option: ");
             char input = Character.toUpperCase(scanner.nextLine().charAt(0));
             switch(Character.toUpperCase(input)) {
-                case 'A' -> {displayAllEntries();break;}
-                case 'D' -> {displayDeposits();break;}
-                case 'P' -> {displayPayments();break;}
-                case 'X' -> {exit = true;break;}
-                default -> System.out.println("Try again");
+                case 'A':
+                    displayAllEntries();
+                    break;
+                case 'D':
+                    displayDeposits();
+                    break;
+                case 'P':
+                    displayPayments();
+                    break;
+                case 'R':
+                    reportsScreen();
+                    break;
+                case 'H':
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Try again");
+                    break;
             }
         }
     }
@@ -142,15 +167,55 @@ public class Main {
         return transactions;
     }
 
-    // get all negative transactions
-    public static void getPayments() {
+    public static void displayDeposits() {
+        System.out.println();
+        for(int i=0; i<transactions.size(); i++) {
+            if(transactions.get(i).getAmount()>0){
+                System.out.println(" " + transactions.get(i).getAmount());
+            }
+        }
+        System.out.println();
+    }
 
+    public static void displayAllEntries() {
+        System.out.println();
+        for(int i=0; i<transactions.size(); i++) {
+            if (transactions.get(i).getAmount() < 0) {
+                System.out.println(transactions.get(i).getAmount());
+            } else {
+                System.out.println(" " + transactions.get(i).getAmount());
+            }
+        }
+        System.out.println();
+    }
+
+    // get all negative transactions
+    public static void displayPayments() {
+
+        System.out.println();
         for (int i = 0; i < transactions.size(); i++) {
             if (transactions.get(i).getAmount() < 0) {
-                System.out.println();
+                System.out.println(transactions.get(i).getAmount());
             }
 
         }
+        System.out.println();
+    }
+
+    public static void reportsScreen() {
+        System.out.println("""
+                =====================================
+                           Reports  Screen           
+                =====================================
+                
+                1) Month To Date
+                2) Previous Month
+                3) Year To Date
+                4) Previous Year
+                5) Search by Vendor
+                0) Back
+                
+                """);
     }
 
     //public static void searchVendor() {
