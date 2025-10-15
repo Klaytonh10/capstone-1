@@ -6,9 +6,9 @@ public class Transaction implements Comparable<Transaction>{
     private String time = "";
     private String description = "";
     private String vendor = "";
-    private String amount = "";
+    private double amount = 0;
 
-    public Transaction(String date, String time, String description, String vendor, String amount) {
+    public Transaction(String date, String time, String description, String vendor, double amount) {
         this.date = date;
         this.time = time;
         this.description = description;
@@ -48,11 +48,11 @@ public class Transaction implements Comparable<Transaction>{
         this.vendor = vendor;
     }
 
-    public String getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
