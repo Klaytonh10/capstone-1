@@ -3,9 +3,11 @@ package org.example;
 import javax.swing.text.DateFormatter;
 import java.io.*;
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
@@ -144,6 +146,7 @@ public class Main {
     }
 
     public static ArrayList<Transaction> readTransactions() {
+        Collections.sort(transactions);
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String input;
             while((input = reader.readLine()) != null) {
@@ -168,7 +171,7 @@ public class Main {
         System.out.println();
         for(int i=0; i<transactions.size(); i++) {
             if(transactions.get(i).getAmount()>0){
-                System.out.println(" " + transactions.get(i).getAmount());
+                System.out.println(" " + transactions.get(i).getDate() + " " + transactions.get(i).getVendor() + " " + transactions.get(i).getAmount());
             }
         }
         System.out.println();
@@ -178,9 +181,9 @@ public class Main {
         System.out.println();
         for(int i=0; i<transactions.size(); i++) {
             if (transactions.get(i).getAmount() < 0) {
-                System.out.println(transactions.get(i).getAmount());
+                System.out.println(" " + transactions.get(i).getDate() + " " + transactions.get(i).getVendor() + " " + transactions.get(i).getAmount());
             } else {
-                System.out.println(" " + transactions.get(i).getAmount());
+                System.out.println(" " + transactions.get(i).getDate() + " " + transactions.get(i).getVendor() + " " + transactions.get(i).getAmount());
             }
         }
         System.out.println();
@@ -191,7 +194,7 @@ public class Main {
         System.out.println();
         for (int i = 0; i < transactions.size(); i++) {
             if (transactions.get(i).getAmount() < 0) {
-                System.out.println(transactions.get(i).getAmount());
+                System.out.println(" " + transactions.get(i).getDate() + " " + transactions.get(i).getVendor() + " " + transactions.get(i).getAmount());
             }
 
         }
@@ -199,18 +202,67 @@ public class Main {
     }
 
     public static void reportsScreen() {
-        System.out.println("""
-                =====================================
-                           Reports  Screen           
-                =====================================
-                
-                1) Month To Date
-                2) Previous Month
-                3) Year To Date
-                4) Previous Year
-                5) Search by Vendor
-                0) Back
-                """);
+        boolean exit = false;
+        while(!exit){
+            System.out.println("""
+                    =====================================
+                               Reports  Screen           
+                    =====================================
+                    
+                    1) Month To Date
+                    2) Previous Month
+                    3) Year To Date
+                    4) Previous Year
+                    5) Search by Vendor
+                    0) Back
+                    """);
+            System.out.print("Select an option: ");
+            char input = scanner.nextLine().charAt(0);
+            switch (Character.toUpperCase(input)) {
+                case '1':
+                    monthToDate();
+                    break;
+                case '2':
+                    System.out.println("2 selected");
+                    break;
+                case '3':
+                    System.out.println("3 selected");
+                    break;
+                case '4':
+                    System.out.println("4 selected");
+                    break;
+                case '5':
+                    System.out.println("5 selected");
+                    break;
+                case '0':
+                    System.out.println("0 selected");
+                    break;
+                default:
+                    System.out.println("Try again");
+                    break;
+            }
+        }
+    }
+
+    public static void previousMonth() {
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM");
+        String lastMonth = today.format(dateTimeFormatter);
+
+    }
+
+    public static void monthToDate() {
+        LocalDate today = LocalDate.now();
+        LocalDate firstOfMonth = today.withDayOfMonth(1);
+        boolean found = false;
+        System.out.println("Month to Date Transactions: \n");
+        for (Transaction transaction : transactions) {
+            LocalDate transactionDate = LocalDate.parse(transaction.getDate());
+            if(!transactionDate.isBefore(firstOfMonth) && !transactionDate.isAfter(today)) {
+                System.out.println(transaction + "\n");
+                found = true;
+            }
+        }
     }
 
     //public static void searchVendor() {
