@@ -16,6 +16,10 @@ public class Transaction implements Comparable<Transaction>{
         this.amount = amount;
     }
 
+    //public String getReport() {
+//
+    //}
+
     public String getDate() {
         return date;
     }

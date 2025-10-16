@@ -38,7 +38,6 @@ public class Main {
                     P) Make Payment
                     L) Ledger
                     X) Exit
-                    
                     """);
             System.out.print("Select an option: ");
             // get input
@@ -85,6 +84,9 @@ public class Main {
             amount = amount * -1;
         }
         Transaction transaction = new Transaction(date, time, description, vendor, amount);
+        if(!isPositive) {
+            System.out.println("Payment of " + transaction.getAmount() + " to " + transaction.getVendor());
+        }
         transactions.add(transaction);
 
         //write transactions to file
@@ -115,7 +117,6 @@ public class Main {
                     P) Payments
                     R) Reports
                     H) Home
-                    
                     """);
             System.out.print("Select an option: ");
             char input = Character.toUpperCase(scanner.nextLine().charAt(0));
@@ -209,7 +210,6 @@ public class Main {
                 4) Previous Year
                 5) Search by Vendor
                 0) Back
-                
                 """);
     }
 
