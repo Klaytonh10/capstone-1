@@ -187,7 +187,6 @@ public class Main {
 
     // get all negative transactions
     public static void displayPayments() {
-
         System.out.println();
         for (int i = 0; i < transactions.size(); i++) {
             if (transactions.get(i).getAmount() < 0) {
