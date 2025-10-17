@@ -74,3 +74,9 @@ This block of code is reusable for any methods that check from a specific date t
 4) Previous Year
 5) Search by Vendor
 0) Back
+
+
+## Takeaways
+- It's easy to take advantage of the amount of time left
+- A seemingly simple task can be your hardest challenge in reality
+- It's okay to ask for help
