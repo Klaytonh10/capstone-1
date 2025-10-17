@@ -223,19 +223,19 @@ public class Main {
                     monthToDate();
                     break;
                 case '2':
-                    System.out.println("2 selected");
+                    previousMonth();
                     break;
                 case '3':
-                    System.out.println("3 selected");
+                    yearToDate();
                     break;
                 case '4':
-                    System.out.println("4 selected");
+                    previousYear();
                     break;
                 case '5':
-                    System.out.println("5 selected");
+                    searchVendor();
                     break;
                 case '0':
-                    System.out.println("0 selected");
+                    exit = true;
                     break;
                 default:
                     System.out.println("Try again");
@@ -244,33 +244,79 @@ public class Main {
         }
     }
 
-    public static void previousMonth() {
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM");
-        String lastMonth = today.format(dateTimeFormatter);
-
+    public static void searchVendor() {
+        System.out.println();
+        System.out.println("Enter vendor name: ");
+        String input = scanner.nextLine();
+        for(Transaction transaction : transactions) {
+            if(transaction.getVendor().equalsIgnoreCase(input)) {
+                System.out.println();
+                System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                System.out.println();
+            }
+        }
+        System.out.println();
     }
 
-    public static void monthToDate() {
+    public static void previousYear() {
         LocalDate today = LocalDate.now();
-        LocalDate firstOfMonth = today.withDayOfMonth(1);
-        boolean found = false;
-        System.out.println("Month to Date Transactions: \n");
-        for (Transaction transaction : transactions) {
-            LocalDate transactionDate = LocalDate.parse(transaction.getDate());
-            if(!transactionDate.isBefore(firstOfMonth) && !transactionDate.isAfter(today)) {
-                System.out.println(transaction + "\n");
-                found = true;
+        LocalDate firstDayLastYear = today.minusYears(1).withDayOfYear(1);
+        LocalDate lastDayLastYear = today.withDayOfYear(1).minusDays(1);
+
+        System.out.println("Previous Month's Transactions: \n");
+
+        for(Transaction transaction : transactions) {
+            try {
+                LocalDate transactionDate = LocalDate.parse(transaction.getDate());
+                if(!transactionDate.isBefore(firstDayLastYear) && !transactionDate.isAfter(lastDayLastYear)) {
+                    System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                }
+            } catch (Exception e) {
+                System.out.println("Error parsing transaction date: " + transaction.getDate());
             }
         }
     }
 
-    //public static void searchVendor() {
-    //
-    //    for(int i = 0; i < transactions.size(); i++) {
-    //        if(transactions.get(i).getVendor().equalsIgnoreCase()) {
-    //
-    //        }
-    //    }
-    //}
+    public static void previousMonth() {
+        LocalDate today = LocalDate.now();
+        LocalDate firstDayLastMonth = today.minusMonths(1).withDayOfMonth(1);
+        LocalDate lastDayLastMonth = today.withDayOfMonth(1).minusDays(1);
+
+        System.out.println("Previous Month's Transactions: \n");
+
+        for(Transaction transaction : transactions) {
+            try {
+                LocalDate transactionDate = LocalDate.parse(transaction.getDate());
+                if(!transactionDate.isBefore(firstDayLastMonth) && !transactionDate.isAfter(lastDayLastMonth)) {
+                    System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                }
+            } catch (Exception e) {
+                System.out.println("Error parsing transaction date: " + transaction.getDate());
+            }
+        }
+    }
+
+    public static void yearToDate() {
+        LocalDate today = LocalDate.now();
+        LocalDate firstOfMonth = today.withDayOfMonth(1);
+        System.out.println("Month to Date Transactions: \n");
+        for (Transaction transaction : transactions) {
+            LocalDate transactionDate = LocalDate.parse(transaction.getDate());
+            if(!transactionDate.isBefore(firstOfMonth) && !transactionDate.isAfter(today)) {
+                System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount() + "\n");
+            }
+        }
+    }
+
+    public static void monthToDate() {
+        LocalDate today = LocalDate.now();
+        LocalDate firstOfYear = today.withDayOfYear(1);
+        System.out.println("Month to Date Transactions: \n");
+        for (Transaction transaction : transactions) {
+            LocalDate transactionDate = LocalDate.parse(transaction.getDate());
+            if(!transactionDate.isBefore(firstOfYear) && !transactionDate.isAfter(today)) {
+                System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount() + "\n");
+            }
+        }
+    }
 }
