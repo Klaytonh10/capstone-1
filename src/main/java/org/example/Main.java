@@ -175,7 +175,7 @@ public class Main {
         System.out.println();
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() > 0) {
-                System.out.println(" " + transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                System.out.println(" " + transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
             }
         }
         System.out.println();
@@ -185,7 +185,7 @@ public class Main {
     public static void displayAllEntries() {
         System.out.println();
         for (Transaction transaction : transactions) {
-            System.out.println(" " + transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
+            System.out.println(" " + transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
         }
         System.out.println();
     }
@@ -195,7 +195,7 @@ public class Main {
         System.out.println();
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() < 0) {
-                System.out.println(" " + transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                System.out.println(" " + transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
             }
 
         }
@@ -252,7 +252,7 @@ public class Main {
         String input = scanner.nextLine();
         for(Transaction transaction : transactions) {
             if(transaction.getVendor().equalsIgnoreCase(input)) {
-                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
             }
         }
         System.out.println();
@@ -270,7 +270,7 @@ public class Main {
             try {
                 LocalDate transactionDate = LocalDate.parse(transaction.getDate());
                 if(!transactionDate.isBefore(firstDayLastYear) && !transactionDate.isAfter(lastDayLastYear)) {
-                    System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                    System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
                 }
             } catch (Exception e) {
                 System.out.println("Error parsing transaction date: " + transaction.getDate());
@@ -290,7 +290,7 @@ public class Main {
             try {
                 LocalDate transactionDate = LocalDate.parse(transaction.getDate());
                 if(!transactionDate.isBefore(firstDayLastMonth) && !transactionDate.isAfter(lastDayLastMonth)) {
-                    System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                    System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
                 }
             } catch (Exception e) {
                 System.out.println("Error parsing transaction date: " + transaction.getDate());
@@ -306,7 +306,7 @@ public class Main {
         for (Transaction transaction : transactions) {
             LocalDate transactionDate = LocalDate.parse(transaction.getDate());
             if(!transactionDate.isBefore(firstOfMonth) && !transactionDate.isAfter(today)) {
-                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
             }
         }
     }
@@ -319,7 +319,7 @@ public class Main {
         for (Transaction transaction : transactions) {
             LocalDate transactionDate = LocalDate.parse(transaction.getDate());
             if(!transactionDate.isBefore(firstOfYear) && !transactionDate.isAfter(today)) {
-                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " $" + transaction.getAmount());
             }
         }
     }
