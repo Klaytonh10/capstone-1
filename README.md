@@ -1,3 +1,33 @@
+
+```
+
+       _____________________   _____  ________       _____  ___________
+       \______   \_   _____/  /  _  \ \______ \     /     \ \_   _____/
+       |       _/|    __)_  /  /_\  \ |    |  \   /  \ /  \ |    __)_
+       |    |   \|        \/    |    \|    `   \ /    Y    \|        \
+       |____|_  /_______  /\____|__  /_______  / \____|__  /_______  /
+       \/        \/         \/        \/          \/        \/
+                        
+                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡾⡇⠀⢶⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⠀⣠⡾⢋⡼⠁⠀⣸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⠀⣿⣳⠏⠀⣠⠞⣡⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⡄⢸⣯⡾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠳⠸⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⡀⢀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣁⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⢸⡟⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⢻⢿⣷⢀⣀⣀⣀⡀⠀
+                     ⢸⡇⠀⣶⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠶⣒⣒⣿⣋⣥⣄⡉⢻⣆
+                     ⢸⣿⠈⣇⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠶⠶⢶⣿⠁⠀⢸⡇⢰⣿
+                     ⠀⢻⣆⢻⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠒⠒⣾⣯⣤⣴⠟⣡⣿⠃
+                     ⠀⠈⢿⣎⠻⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⣿⣿⣭⣥⣴⡿⠟⠁⠀
+                     ⠀⠀⠈⢿⣷⣄⠑⣦⡄⠀⠀⠀⣀⠀⢛⣻⣿⡟⠉⠉⠉⠀⠀⠀⠀⠀
+                     ⠀⣴⡶⠶⠿⠿⢿⣶⣤⣤⣤⣤⣽⣿⠿⠛⣛⣟⣷⡆⠀⠀⠀⠀⠀⠀
+⠀                     ⠛⠷⠶⣤⣤⣤⣤⣴⣾⣿⣿⣶⣦⣤⣶⣶⡾⠟⠁⠀⠀⠀⠀⠀⠀
+
+
+```
+
+
 # Accounting Ledger
 ## Features
 
@@ -13,9 +43,15 @@
 - [ ] Search Tranasactions By Vendor Name
 
 
-- ![Capture.PNG](src/main/resources/Capture.PNG)
+![Capture.PNG](src/main/resources/Capture.PNG)
 
-```declarative
+Each menu prompts for user input which calls to a specific method
+
+![Capture1.PNG](src/main/resources/Capture1.PNG)
+
+Transactions are saved in a file to call to later
+
+```
 public static void monthToDate() {
     LocalDate today = LocalDate.now();
     LocalDate firstOfYear = today.withDayOfYear(1);

@@ -1,8 +1,6 @@
 package org.example;
 
-import javax.swing.text.DateFormatter;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,11 +11,11 @@ import java.util.Scanner;
 public class Main {
 
     //Transactions list
-    static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    static ArrayList<Transaction> transactions = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     static String fileName = "src/main/resources/transactions.csv";
 
-    public static void main(String[] args) throws IOException  {
+    public static void main(String[] args) {
 
         readTransactions();
 
@@ -57,14 +55,16 @@ public class Main {
                     break;
                 case "X":
                     exit = true;
+                    System.out.println("Bye Bye");
                     break;
                 default:
                     System.out.println("try again");
                     break;
             }
-        };
+        }
     }
 
+    @SuppressWarnings("ThrowablePrintedToSystemOut")
     public static void addTransaction(boolean isPositive) {
         // prompt user for the deposit information and save to csv
 
@@ -98,8 +98,6 @@ public class Main {
             bufferedWriter.write(tranString);
             bufferedWriter.newLine();
             bufferedWriter.close();
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -111,15 +109,15 @@ public class Main {
         while(!exit) {
             System.out.println("""
                     =====================================
-                                Ledger Screen            
+                                Ledger Screen           \s
                     =====================================
-                    
+                   \s
                     A) Display all entries
                     D) Deposits
                     P) Payments
                     R) Reports
                     H) Home
-                    """);
+                   \s""");
             System.out.print("Select an option: ");
             char input = Character.toUpperCase(scanner.nextLine().charAt(0));
             switch(Character.toUpperCase(input)) {
@@ -145,7 +143,8 @@ public class Main {
         }
     }
 
-    public static ArrayList<Transaction> readTransactions() {
+    @SuppressWarnings("ThrowablePrintedToSystemOut")
+    public static void readTransactions() {
         Collections.sort(transactions);
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String input;
@@ -159,19 +158,16 @@ public class Main {
                 Transaction transaction = new Transaction(date, time, description, vendor, Double.parseDouble(amount));
                 transactions.add(transaction);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
         } catch (Exception e) {
             System.out.println(e);
         }
-        return transactions;
     }
 
     public static void displayDeposits() {
         System.out.println();
-        for(int i=0; i<transactions.size(); i++) {
-            if(transactions.get(i).getAmount()>0){
-                System.out.println(" " + transactions.get(i).getDate() + " " + transactions.get(i).getVendor() + " " + transactions.get(i).getAmount());
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0) {
+                System.out.println(" " + transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
             }
         }
         System.out.println();
@@ -179,12 +175,8 @@ public class Main {
 
     public static void displayAllEntries() {
         System.out.println();
-        for(int i=0; i<transactions.size(); i++) {
-            if (transactions.get(i).getAmount() < 0) {
-                System.out.println(" " + transactions.get(i).getDate() + " " + transactions.get(i).getVendor() + " " + transactions.get(i).getAmount());
-            } else {
-                System.out.println(" " + transactions.get(i).getDate() + " " + transactions.get(i).getVendor() + " " + transactions.get(i).getAmount());
-            }
+        for (Transaction transaction : transactions) {
+            System.out.println(" " + transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
         }
         System.out.println();
     }
@@ -192,9 +184,9 @@ public class Main {
     // get all negative transactions
     public static void displayPayments() {
         System.out.println();
-        for (int i = 0; i < transactions.size(); i++) {
-            if (transactions.get(i).getAmount() < 0) {
-                System.out.println(" " + transactions.get(i).getDate() + " " + transactions.get(i).getVendor() + " " + transactions.get(i).getAmount());
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() < 0) {
+                System.out.println(" " + transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
             }
 
         }
@@ -206,7 +198,7 @@ public class Main {
         while(!exit){
             System.out.println("""
                     =====================================
-                               Reports  Screen           
+                               Reports  Screen
                     =====================================
                     
                     1) Month To Date
@@ -250,8 +242,7 @@ public class Main {
         String input = scanner.nextLine();
         for(Transaction transaction : transactions) {
             if(transaction.getVendor().equalsIgnoreCase(input)) {
-                System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount());
-                System.out.println();
+                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
             }
         }
         System.out.println();
@@ -268,7 +259,7 @@ public class Main {
             try {
                 LocalDate transactionDate = LocalDate.parse(transaction.getDate());
                 if(!transactionDate.isBefore(firstDayLastYear) && !transactionDate.isAfter(lastDayLastYear)) {
-                    System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                    System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
                 }
             } catch (Exception e) {
                 System.out.println("Error parsing transaction date: " + transaction.getDate());
@@ -287,7 +278,7 @@ public class Main {
             try {
                 LocalDate transactionDate = LocalDate.parse(transaction.getDate());
                 if(!transactionDate.isBefore(firstDayLastMonth) && !transactionDate.isAfter(lastDayLastMonth)) {
-                    System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount());
+                    System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
                 }
             } catch (Exception e) {
                 System.out.println("Error parsing transaction date: " + transaction.getDate());
@@ -302,7 +293,7 @@ public class Main {
         for (Transaction transaction : transactions) {
             LocalDate transactionDate = LocalDate.parse(transaction.getDate());
             if(!transactionDate.isBefore(firstOfMonth) && !transactionDate.isAfter(today)) {
-                System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount() + "\n");
+                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
             }
         }
     }
@@ -314,7 +305,7 @@ public class Main {
         for (Transaction transaction : transactions) {
             LocalDate transactionDate = LocalDate.parse(transaction.getDate());
             if(!transactionDate.isBefore(firstOfYear) && !transactionDate.isAfter(today)) {
-                System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount() + "\n");
+                System.out.println(transaction.getDate() + " " + transaction.getDescription() + " " + transaction.getVendor() + " " + transaction.getAmount());
             }
         }
     }
