@@ -250,7 +250,6 @@ public class Main {
         String input = scanner.nextLine();
         for(Transaction transaction : transactions) {
             if(transaction.getVendor().equalsIgnoreCase(input)) {
-                System.out.println();
                 System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount());
                 System.out.println();
             }

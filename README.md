@@ -1,25 +1,37 @@
 # Accounting Ledger
 ## Features
 
-- [ ] Presents user with main menu
-- [ ] Open window based on input
+- [ ] Add and save deposits
+- [ ] Make payments 
+- [ ] Display All entries 
+- [ ] Display All Deposits
+- [ ] Display All Payments
+- [ ] Display Every Transaction This Month
+- [ ] Display Every Transaction Last Month
+- [ ] Display Every Transaction This Year
+- [ ] Display Every Transaction Last Year
+- [ ] Search Tranasactions By Vendor Name
 
-### Add Deposit 
-* Save deposit information in csv file per user
 
-### Make Payment (Debit)
-* Save debit information in csv file
+- ![Capture.PNG](src/main/resources/Capture.PNG)
 
-### Exit
-* Exit/End application
+```declarative
+public static void monthToDate() {
+    LocalDate today = LocalDate.now();
+    LocalDate firstOfYear = today.withDayOfYear(1);
+    System.out.println("Month to Date Transactions: \n");
+    for (Transaction transaction : transactions) {
+        LocalDate transactionDate = LocalDate.parse(transaction.getDate());
+        if(!transactionDate.isBefore(firstOfYear) && !transactionDate.isAfter(today)) {
+        System.out.println(transaction.getDate() + " " + transaction.getVendor() + " " + transaction.getAmount() + "\n");
+        }
+    }
+}
+```
+^
+This block of code is reusable for any methods that check from a specific date to today.
 
-### Ledger
-* Display entries in recently-added order
-* Display only deposits
-* Display only payments (negative entries)
-
->A new screen that allows the user to run pre
-defined reports or to run a custom search (Reports)
+>A new screen that allows the user to run pre-defined reports or to run a custom search (Reports)
 1) Month-to-date
 2) Previous month
 3) Year-to-date
