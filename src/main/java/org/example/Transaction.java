@@ -4,7 +4,7 @@ public class Transaction implements Comparable<Transaction>{
 
     private String date;
     private final String time;
-    private String description;
+    private final String description;
     private final String vendor;
     private final double amount;
 

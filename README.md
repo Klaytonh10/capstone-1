@@ -43,11 +43,11 @@
 - [ ] Search Tranasactions By Vendor Name
 
 
-![Capture.PNG](src/main/resources/Capture.PNG)
+![Capture.PNG](images/Capture.PNG)
 
 Each menu prompts for user input which calls to a specific method
 
-![Capture1.PNG](src/main/resources/Capture1.PNG)
+![Capture1.PNG](images/Capture1.PNG)
 
 Transactions are saved in a file to call to later
 

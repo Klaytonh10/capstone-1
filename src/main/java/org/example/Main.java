@@ -10,13 +10,15 @@ import java.util.Scanner;
 
 public class Main {
 
-    //Transactions list
+    //Transactions list that is accessible throughout the program
     static ArrayList<Transaction> transactions = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
+    //Lazy programmer = good programmer
     static String fileName = "src/main/resources/transactions.csv";
 
     public static void main(String[] args) {
 
+        //load previous transactions into ArrayList
         readTransactions();
 
         mainMenu();
@@ -64,6 +66,7 @@ public class Main {
         }
     }
 
+    //Takes boolean to determine if transaction is a deposit or a payment(positive or negative)
     @SuppressWarnings("ThrowablePrintedToSystemOut")
     public static void addTransaction(boolean isPositive) {
         // prompt user for the deposit information and save to csv
@@ -82,12 +85,15 @@ public class Main {
         String vendor = scanner.nextLine();
         System.out.print("Enter Deposit Amount: $");
         double amount = scanner.nextDouble();
+        //Turns to negative if payment
         if(!isPositive) {
             amount = amount * -1;
         }
         Transaction transaction = new Transaction(date, time, description, vendor, amount);
         if(!isPositive) {
             System.out.println("Payment of " + transaction.getAmount() + " to " + transaction.getVendor());
+        } else {
+            System.out.println("Deposit of " + transaction.getAmount() + " to " + transaction.getVendor());
         }
         transactions.add(transaction);
 
@@ -143,6 +149,7 @@ public class Main {
         }
     }
 
+    //Push existing transactions into ArrayList
     @SuppressWarnings("ThrowablePrintedToSystemOut")
     public static void readTransactions() {
         Collections.sort(transactions);
@@ -163,6 +170,7 @@ public class Main {
         }
     }
 
+    //Display all positive transactions
     public static void displayDeposits() {
         System.out.println();
         for (Transaction transaction : transactions) {
@@ -173,6 +181,7 @@ public class Main {
         System.out.println();
     }
 
+    //Display all transactions where positive or negative
     public static void displayAllEntries() {
         System.out.println();
         for (Transaction transaction : transactions) {
@@ -181,7 +190,7 @@ public class Main {
         System.out.println();
     }
 
-    // get all negative transactions
+    //Display all negative transactions
     public static void displayPayments() {
         System.out.println();
         for (Transaction transaction : transactions) {
@@ -236,6 +245,7 @@ public class Main {
         }
     }
 
+    //Prompt user to input vendors, then display any transactions under those vendors
     public static void searchVendor() {
         System.out.println();
         System.out.println("Enter vendor name: ");
@@ -248,6 +258,7 @@ public class Main {
         System.out.println();
     }
 
+    //Display all transactions from previous years
     public static void previousYear() {
         LocalDate today = LocalDate.now();
         LocalDate firstDayLastYear = today.minusYears(1).withDayOfYear(1);
@@ -267,6 +278,7 @@ public class Main {
         }
     }
 
+    //Display all transactions from the month prior to today
     public static void previousMonth() {
         LocalDate today = LocalDate.now();
         LocalDate firstDayLastMonth = today.minusMonths(1).withDayOfMonth(1);
@@ -286,6 +298,7 @@ public class Main {
         }
     }
 
+    //Display all transactions from this year up until today
     public static void yearToDate() {
         LocalDate today = LocalDate.now();
         LocalDate firstOfMonth = today.withDayOfMonth(1);
@@ -298,6 +311,7 @@ public class Main {
         }
     }
 
+    //Display all transactions from this month up until today
     public static void monthToDate() {
         LocalDate today = LocalDate.now();
         LocalDate firstOfYear = today.withDayOfYear(1);
