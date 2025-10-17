@@ -18,9 +18,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //load previous transactions into ArrayList
+        //Load previous transactions into ArrayList
         readTransactions();
 
+        //Start program
         mainMenu();
 
     }
